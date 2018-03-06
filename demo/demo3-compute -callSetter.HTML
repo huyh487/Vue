@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  
+  <p>{{ site }}</p>
+  <button v-on:click="changeDate">反转字符串</button>
+</div>
+
+<script>
+var vm = new Vue({
+  el: '#app',
+  data: {
+	name: 'Google',
+	url: 'http://www.google.com'
+  },
+  methods: {
+    changeDate: function () {
+    	console.log(" changeDate set ");
+      vm.site = '菜鸟教程 http://www.runoob.com';
+	  document.write('name: ' + vm.name);
+      document.write('<br>');
+      document.write('url: ' + vm.url);
+    }
+  },
+  computed: {
+    site: {
+      // getter
+      get: function () {
+      	console.log(" computed");
+        return this.name + ' ' + this.url
+      },
+      // setter
+      set: function (newValue) {
+      	console.log(" computed set ");
+        var names = newValue.split(' ')
+        this.name = names[0]
+        this.url = names[names.length - 1]
+      }
+    }
+  }
+})
+// 调用 setter， vm.name 和 vm.url 也会被对应更新
+//vm.site = '菜鸟教程 http://www.runoob.com';
+//document.write('name: ' + vm.name);
+//document.write('<br>');
+//document.write('url: ' + vm.url);
+</script>
+</body>
+</html>

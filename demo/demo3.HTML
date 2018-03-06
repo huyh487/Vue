@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+
+<style>
+#example{margin:100px auto;width:600px;}
+.show{margin:10px;}
+#searchText{display: block;margin:0 auto 10px;height:24px;line-height: 24px;width:200px;}
+.content ul li{text-align: center;}
+.content ul li span{display: inline-block;width:150px;font-size:15px;color:#000;}
+</style>
+
+</head>
+<body>
+<div id="app">
+  {{ message | capitalizesss | capitalizessd  }}
+  
+  
+  
+  
+  <input type="text" id="searchText" placeholder="搜索id或者姓名" v-model="searchData"/>
+    <div class="content">
+        <ul>
+            <li v-for="item in items | filterBy searchData in 'id' 'name' | orderBy 'name' '-1'">
+                <span>{{item.id}}</span>
+                <span>{{item.name}}</span>
+                <span>{{item.time}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+	
+<script>
+var VM = new Vue({
+  el: '#app',
+  data: {
+	message: 'runoob',
+	searchData:'',
+	sites: [
+      { name: 'Runoob' },
+      { name: 'Google' },
+      { name: 'Taobao' }
+    ],
+    items: [
+            {id:'1008',name:'涛涛',time:'20170207'},
+            {id:'1098',name:'合同',time:'20170213'},
+            {id:'1107',name:'晓丽',time:'20170304'},
+            {id:'1004',name:'小兰',time:'20170112'},
+            {id:'1102',name:'财务',time:'20170203'},
+            {id:'1108',name:'哈哈',time:'20170208'},
+            {id:'1345',name:'测试',time:'20170201'},
+        ]    
+  },
+  filters: {
+    capitalizesss: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    },
+	  capitalizessd: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      console.log(value.charAt(value.length - 1).toUpperCase() + " slice "+ value.slice(1) + "  " + (value.charAt(value.length - 1).toUpperCase() + value.slice(1)))
+      return  value.slice(0, value.length - 1) + value.charAt(value.length - 1).toUpperCase()
+    },
+    ready:function(){
+            
+        },
+        watch:{
+            items:{
+                handler:function(val,oldval){
+                    
+                },
+                deep:true
+            }
+        },
+        
+        methods:{
+            
+        }
+  }
+})
+</script>
+</body>
+</html>
